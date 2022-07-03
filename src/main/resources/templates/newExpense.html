@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assistente Financeiro</title>
+</head>
+
+<body>
+<main>
+  <div>
+    <h1>Assistente Financeiro</h1>
+  </div>
+  <div class="container3">
+    <h2>Cadastrar Despesa</h2>
+    <form action="">
+      <div>
+        <div class="input-geral">
+          <h3>Pagar para:</h3>
+          <input type="text" name="empresa" id="empresa" placeholder="Empresa" required>
+          <div class="underline"></div>
+        </div>
+        <div class="input-geral">
+          <h3>Referente á:</h3>
+          <input type="text" name="item" id="item" placeholder="Item" required>
+          <div class="underline"></div>
+        </div>
+        <div class="input-geral">
+          <h3>Valor da parcela:</h3>
+          <input type="text" name="valor" id="valor" placeholder="R$ 0,00" required>
+          <div class="underline"></div>
+        </div>
+        <div class="input-geral">
+          <h3>Total de parcelas:</h3>
+          <input type="text" placeholder="Quantidade de Parcelas">
+          <div class="underline"></div>
+        </div>
+        <div class="input-geral">
+          <h3>Parcelas já pagas:</h3>
+          <input type="text" placeholder="Quantidade de Parcelas">
+          <div class="underline"></div>
+        </div>
+      </div>
+      <div>
+        <h4>Tipo de despesa</h4>
+        <div class="radioChacks">
+          <input type="radio" name="tipoParcela" Value="parcelaUnica" id="checkParcelaUnica">
+          <label for="checkParcelaUnica">Parcela única</label><br>
+
+          <input type="radio" name="tipoParcela" Value="tempoDeterminado" id="checkParcelaTempoDeterminado">
+          <label for="checkParcelaTempoDeterminado">Parcela por Tempo Determinado</label><br>
+
+          <input type="radio" name="tipoParcela" Value="despesaFixa" id="checkDespesaFixa">
+          <label for="checkDespesaFixa">Despesa Fixa</label><br>
+        </div>
+        <div>
+          <input type="submit" value="Cadastrar" id="cadastrar">
+        </div>
+      </div>
+    </form>
+
+  </div>
+</main>
+
+</body>
+</html>

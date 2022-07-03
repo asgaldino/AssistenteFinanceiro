@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistente Financeiro</title>
+</head>
+<body>
+<main>
+    <div>
+        <h1>Assistente Financeiro</h1>
+    </div>
+    <div class="container">
+        <h2>Login</h2>
+        <div th:if="${param.error}">
+            Usuário ou senha inválidos.
+        </div>
+        <div th:if="${param.logout}">
+            Você fez logout.
+        </div>
+        <form th:action="@{/login}" method="post">
+            <div class="input-geral">
+                <label>
+                    <input type="text" name="username" placeholder="Email"/>
+                </label>
+                <div class="underline"></div>
+            </div>
+            <div class="input-geral">
+                <label>
+                    <input type="password" name="password" placeholder="Password"/>
+                </label>
+                <div class="underline"></div>
+            </div>
+            <div>
+                <input type="submit" value="Entrar" id="entrar">
+            </div>
+        </form>
+            <div>
+                <a th:href="@{/new}">
+                    <input type="button" value="Novo" id="novo">
+                </a>
+            </div>
+        <!--
+            <div>
+                <input type="submit" value="Esquecia a senha" id="trocaSenha">
+            </div>
+        -->
+    </div>
+</main>
+</body>
+</html>

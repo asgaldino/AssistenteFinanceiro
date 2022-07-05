@@ -1,3 +1,4 @@
+/*
 package com.galdino.AssistenteFinanceiro.Security;
 
 import com.galdino.AssistenteFinanceiro.Model.Entitys.UserBeans;
@@ -27,6 +28,7 @@ public class SecurityConfig{
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "home").hasAuthority("ROLE_user") //acesso irrestrito (Sem usuário e Senha) para as view "/" e "/home"
+                .antMatchers("/new").permitAll()
                 .anyRequest().authenticated()	//define acesso autenticado para as demais views (Nesse caso "/hello")
                 .and()
                 .formLogin()
@@ -55,7 +57,8 @@ public class SecurityConfig{
         return new InMemoryUserDetailsManager(userDetailsList);
     }
     @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
+    public WebSecurityCustomizer ignoringCustomizer() {
         return (web) -> web.ignoring().antMatchers("/new");
     }
 }
+*/

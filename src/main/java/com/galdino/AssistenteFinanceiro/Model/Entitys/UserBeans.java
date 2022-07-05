@@ -20,18 +20,6 @@ public class UserBeans {
     @Column(nullable = false)
     private String role;
 
-    @Override
-    public String toString() {
-        return "UserBeans{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", income=" + income +
-                ", role='" + role + '\'' +
-                '}';
-    }
-
     public Long getId() {
         return id;
     }
@@ -78,5 +66,17 @@ public class UserBeans {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "UserBeans{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", income=" + income +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

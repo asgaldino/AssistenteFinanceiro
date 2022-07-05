@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
-public class ControllerMVC implements WebMvcConfigurer {
+public class ViewController implements WebMvcConfigurer {
 
     public void addViewControllers(ViewControllerRegistry registry) {// Faz o mapeamento das Views para as páginas
         //registry.addViewController("/home").setViewName("home");
@@ -16,5 +16,4 @@ public class ControllerMVC implements WebMvcConfigurer {
         registry.addViewController("/nExpense").setViewName("newExpense");
         registry.addViewController("/login").setViewName("login");
     }
-
 }

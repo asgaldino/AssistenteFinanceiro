@@ -1,9 +1,5 @@
 package com.galdino.AssistenteFinanceiro.Model.Entitys;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -30,6 +26,18 @@ public class ExpenseBeans {
     // Data da Compra
     @Column(nullable = false, length = 10)
     private String purchase_date;
+
+
+    @ManyToOne
+    UserBeans userBeans;
+
+    public UserBeans getUserBeans() {
+        return userBeans;
+    }
+
+    public void setUserBeans(UserBeans userBeans) {
+        this.userBeans = userBeans;
+    }
 
     public Long getId() {
         return id;
@@ -85,5 +93,19 @@ public class ExpenseBeans {
 
     public void setPurchase_date(String purchase_date) {
         this.purchase_date = purchase_date;
+    }
+
+    @Override
+    public String toString() {
+        return "ExpenseBeans{" +
+                "id=" + id +
+                ", receiver='" + receiver + '\'' +
+                ", item='" + item + '\'' +
+                ", number_installments=" + number_installments +
+                ", value_installments=" + value_installments +
+                ", due_date='" + due_date + '\'' +
+                ", purchase_date='" + purchase_date + '\'' +
+                ", userBeans=" + userBeans +
+                '}';
     }
 }

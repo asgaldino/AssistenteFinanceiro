@@ -28,7 +28,7 @@ public class ExpenseBeans {
     private String purchase_date;
 
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
     UserBeans userBeans;
 
     public UserBeans getUserBeans() {

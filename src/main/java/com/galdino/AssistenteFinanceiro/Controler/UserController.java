@@ -1,69 +1,53 @@
 package com.galdino.AssistenteFinanceiro.Controler;
 
-
-
 import com.galdino.AssistenteFinanceiro.Model.Entitys.UserBeans;
 import com.galdino.AssistenteFinanceiro.Repository.UserCrudRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.*;
 
-
-import javax.swing.*;
 import java.math.BigDecimal;
-
 
 @Controller
 @RequestMapping(path="/user")
 public class UserController {
 
-    @Autowired
-    private UserCrudRepository userCrudRepository;
+    private final UserCrudRepository userCrudRepository;
+
+    public UserController(UserCrudRepository userCrudRepository) {
+        this.userCrudRepository = userCrudRepository;
+    }
 
     @PostMapping(path="/add")
-    public @ResponseBody String addUser(@RequestParam String name, @RequestParam String email,
-    @RequestParam String password, @RequestParam BigDecimal income, @RequestParam String role) {
-
-        // realiza o incapsulamento dos dasos
-        UserBeans user = new UserBeans();
-        user.setName(name);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setIncome(income);
-        user.setRole(role);
-        // salvar o novo Usuario no banco
-        userCrudRepository.save(user);
-        return "Salvo";
+    public ResponseEntity<UserBeans> create(@RequestBody UserBeans user) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(userCrudRepository.save(user));
     }
     @GetMapping(path="/all")
     public @ResponseBody Iterable<UserBeans> allUser() {
         return userCrudRepository.findAll();
     }
-
+    @GetMapping(path="/catch")
+    public @ResponseBody UserBeans selectUser(@RequestParam Long id) {
+        return userCrudRepository.findById(id).get();
+    }
     // update
     @PutMapping(path="/update")
     public @ResponseBody String updateUser(
             @RequestParam Long id, @RequestParam String name, @RequestParam String email,
-            @RequestParam String password, @RequestParam String income) {
+            @RequestParam String password, @RequestParam BigDecimal income) {
 
         UserBeans user = userCrudRepository.findById(id).get();
-        if (!name.isEmpty()) {
+        if (name != null) {
             user.setName(name);
-        }
-        if (!email.isEmpty()) {
+        }if (email != null) {
             user.setEmail(email);
-        }
-        if (!password.isEmpty()) {
+        }if (password != null) {
             user.setPassword(password);
-        }
-        if (!income.isEmpty()) {
-            //Converte a string em BigDecimal
-            BigDecimal incomeB = new BigDecimal(income);
-            user.setIncome(incomeB);
-        }
-        userCrudRepository.save(user);
-
+        }if (income != null) {
+            user.setIncome(income);
+        }userCrudRepository.save(user);
         return "Alterado";
     }
     // Delete
@@ -72,5 +56,4 @@ public class UserController {
         userCrudRepository.deleteById(id);
         return "Apagado";
     }
-
 }

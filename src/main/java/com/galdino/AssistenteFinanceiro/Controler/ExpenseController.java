@@ -1,10 +1,10 @@
 package com.galdino.AssistenteFinanceiro.Controler;
 
-
 import com.galdino.AssistenteFinanceiro.Model.Entitys.ExpenseBeans;
 import com.galdino.AssistenteFinanceiro.Model.Entitys.UserBeans;
 import com.galdino.AssistenteFinanceiro.Repository.ExpenseCrudRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,63 +14,56 @@ import java.math.BigDecimal;
 @RequestMapping(path="/expense")
 public class ExpenseController {
 
-    @Autowired
-    private ExpenseCrudRepository expenseCrudRepository;
+    private final ExpenseCrudRepository expenseCrudRepository;
+    private ExpenseBeans expenseBeans;
+
+    public ExpenseController(ExpenseCrudRepository expenseCrudRepository) {
+        this.expenseCrudRepository = expenseCrudRepository;
+    }
 
     @PostMapping(path="/add")
-    public @ResponseBody String addUser(
-            @RequestParam String receiver, @RequestParam String item, @RequestParam int number_installments,
-            @RequestParam BigDecimal value_installments, @RequestParam String due_date,
-            @RequestParam String purchase_date, @RequestParam UserBeans user_beans_id) {
-        // realiza o incapsulamento dos dasos
-        ExpenseBeans expense = new ExpenseBeans();
-        expense.setReceiver(receiver);
-        expense.setItem(item);
-        expense.setNumber_installments(number_installments);
-        expense.setValue_installments(value_installments);
-        expense.setDue_date(due_date);
-        expense.setPurchase_date(purchase_date);
-        expense.setUserBeans(user_beans_id);
-        // salvar o novo Usuario no banco
-        expenseCrudRepository.save(expense);
-        return "Salvo";
+    public ResponseEntity<ExpenseBeans> create(@RequestBody ExpenseBeans expense) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(expenseCrudRepository.save(expense));
     }
     @GetMapping(path="/all")
     public @ResponseBody Iterable<ExpenseBeans> allExpense() {
         return expenseCrudRepository.findAll();
     }
-
+    @GetMapping(path="/catch")
+    public @ResponseBody ExpenseBeans selectExpense(@RequestParam Long id) {
+        return expenseCrudRepository.findById(id).get();
+    }
+    //Com erro
+    @GetMapping(path="/catchByUser")
+    public @ResponseBody ExpenseBeans selectExpenseByUser(@RequestParam Long user_beans_id) {
+        return expenseCrudRepository.findByFk(expenseBeans.getUserBeans());
+    }
     @PutMapping(path="/update")
     public @ResponseBody String updateUser(
             @RequestParam Long id, @RequestParam String receiver, @RequestParam String item,
-            @RequestParam String number_installments, @RequestParam String value_installments,
+            @RequestParam String number_installments, @RequestParam BigDecimal value_installments,
             @RequestParam String due_date, @RequestParam String purchase_date) {
 
         ExpenseBeans expense = expenseCrudRepository.findById(id).get();
-        if (!receiver.isEmpty()) {
+        if (receiver != null) {
             expense.setReceiver(receiver);
         }
-        if (!item.isEmpty()) {
+        if (item != null) {
             expense.setItem(item);
-        }
-        if (!number_installments.isEmpty()) {
+        }if (number_installments != null) {
             //Converte a string em int
             int number_installmentsB = Integer.parseInt(number_installments);
             expense.setNumber_installments(number_installmentsB);
-        }
-        if (!value_installments.isEmpty()) {
+        }if (value_installments != null) {
             //Converte a string em BigDecimal
-            BigDecimal value_installmentsB = new BigDecimal(value_installments);
-            expense.setValue_installments(value_installmentsB);
-        }
-        if (!due_date.isEmpty()) {
+           // BigDecimal value_installmentsB = new BigDecimal(value_installments);
+            expense.setValue_installments(value_installments);
+        }if (due_date != null) {
             expense.setDue_date(due_date);
-        }
-        if (!purchase_date.isEmpty()) {
+        }if (purchase_date != null) {
             expense.setPurchase_date(purchase_date);
-        }
-        expenseCrudRepository.save(expense);
-
+        }expenseCrudRepository.save(expense);
         return "Alterado";
     }
     @DeleteMapping(path="/delete")

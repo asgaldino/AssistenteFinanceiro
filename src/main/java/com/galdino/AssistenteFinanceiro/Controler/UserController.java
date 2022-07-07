@@ -26,13 +26,13 @@ public class UserController {
     }
     @GetMapping(path="/all")
     public @ResponseBody Iterable<UserBeans> allUser() {
+        System.out.println(userCrudRepository.findAll());
         return userCrudRepository.findAll();
     }
     @GetMapping(path="/catch")
     public @ResponseBody UserBeans selectUser(@RequestParam Long id) {
         return userCrudRepository.findById(id).get();
     }
-    // update
     @PutMapping(path="/update")
     public @ResponseBody String updateUser(
             @RequestParam Long id, @RequestParam String name, @RequestParam String email,
@@ -50,7 +50,6 @@ public class UserController {
         }userCrudRepository.save(user);
         return "Alterado";
     }
-    // Delete
     @DeleteMapping(path="/delete")
     public @ResponseBody String deleteUser(@RequestParam Long id) {
         userCrudRepository.deleteById(id);

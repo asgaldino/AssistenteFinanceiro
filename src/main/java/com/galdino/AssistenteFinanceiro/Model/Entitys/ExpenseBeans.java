@@ -1,9 +1,12 @@
 package com.galdino.AssistenteFinanceiro.Model.Entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "tb_expense")
 public class ExpenseBeans {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,15 +31,17 @@ public class ExpenseBeans {
     private String purchase_date;
 
 
-    @ManyToOne(cascade=CascadeType.PERSIST)
-    UserBeans userBeans;
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    @JsonIgnore
+    private UserBeans user;
 
-    public UserBeans getUserBeans() {
-        return userBeans;
+    public UserBeans getUser() {
+        return user;
     }
 
-    public void setUserBeans(UserBeans userBeans) {
-        this.userBeans = userBeans;
+    public void setUser(UserBeans user) {
+        this.user = user;
     }
 
     public Long getId() {
@@ -105,7 +110,7 @@ public class ExpenseBeans {
                 ", value_installments=" + value_installments +
                 ", due_date='" + due_date + '\'' +
                 ", purchase_date='" + purchase_date + '\'' +
-                ", userBeans=" + userBeans +
+                ", user=" + user +
                 '}';
     }
 }

@@ -1,7 +1,6 @@
 package com.galdino.AssistenteFinanceiro.Controler;
 
 import com.galdino.AssistenteFinanceiro.Model.Entitys.ExpenseBeans;
-import com.galdino.AssistenteFinanceiro.Model.Entitys.UserBeans;
 import com.galdino.AssistenteFinanceiro.Repository.ExpenseCrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,6 @@ import java.math.BigDecimal;
 public class ExpenseController {
 
     private final ExpenseCrudRepository expenseCrudRepository;
-    private ExpenseBeans expenseBeans;
 
     public ExpenseController(ExpenseCrudRepository expenseCrudRepository) {
         this.expenseCrudRepository = expenseCrudRepository;
@@ -28,23 +26,22 @@ public class ExpenseController {
     }
     @GetMapping(path="/all")
     public @ResponseBody Iterable<ExpenseBeans> allExpense() {
+        System.out.println(expenseCrudRepository.findAll());
         return expenseCrudRepository.findAll();
     }
     @GetMapping(path="/catch")
     public @ResponseBody ExpenseBeans selectExpense(@RequestParam Long id) {
         return expenseCrudRepository.findById(id).get();
     }
-    //Com erro
     @GetMapping(path="/catchByUser")
-    public @ResponseBody ExpenseBeans selectExpenseByUser(@RequestParam Long user_beans_id) {
-        return expenseCrudRepository.findByFk(expenseBeans.getUserBeans());
+    public @ResponseBody Iterable<ExpenseBeans> selectExpenseByUser(@RequestParam Long fk) {
+        return expenseCrudRepository.findByFk(fk);
     }
     @PutMapping(path="/update")
     public @ResponseBody String updateUser(
             @RequestParam Long id, @RequestParam String receiver, @RequestParam String item,
             @RequestParam String number_installments, @RequestParam BigDecimal value_installments,
             @RequestParam String due_date, @RequestParam String purchase_date) {
-
         ExpenseBeans expense = expenseCrudRepository.findById(id).get();
         if (receiver != null) {
             expense.setReceiver(receiver);

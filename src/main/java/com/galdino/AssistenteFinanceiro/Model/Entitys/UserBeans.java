@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 
 
 @Entity
+@Table(name = "tb_user")
 public class UserBeans {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

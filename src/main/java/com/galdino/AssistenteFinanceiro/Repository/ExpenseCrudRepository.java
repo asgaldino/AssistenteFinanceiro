@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface ExpenseCrudRepository extends CrudRepository<ExpenseBeans, Long> {
-    //Query personalisada para buscar pela foreign key
+    //Query personalizada para buscar pela foreign key
     @Query("select e from ExpenseBeans e where e.user.id = :fk")
     List<ExpenseBeans> findByFk(Long fk);
 }

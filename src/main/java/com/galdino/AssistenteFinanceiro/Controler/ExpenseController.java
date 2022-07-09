@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
-@Controller
-@RequestMapping(path="/expense")
+@RestController
+@RequestMapping(path="/api/expense")
 public class ExpenseController {
 
     private final ExpenseCrudRepository expenseCrudRepository;
@@ -25,20 +25,19 @@ public class ExpenseController {
                 .body(expenseCrudRepository.save(expense));
     }
     @GetMapping(path="/all")
-    public @ResponseBody Iterable<ExpenseBeans> allExpense() {
-        System.out.println(expenseCrudRepository.findAll());
+    public Iterable<ExpenseBeans> allExpense() {
         return expenseCrudRepository.findAll();
     }
     @GetMapping(path="/catch")
-    public @ResponseBody ExpenseBeans selectExpense(@RequestParam Long id) {
+    public ExpenseBeans selectExpense(@RequestParam Long id) {
         return expenseCrudRepository.findById(id).get();
     }
     @GetMapping(path="/catchByUser")
-    public @ResponseBody Iterable<ExpenseBeans> selectExpenseByUser(@RequestParam Long fk) {
+    public Iterable<ExpenseBeans> selectExpenseByUser(@RequestParam Long fk) {
         return expenseCrudRepository.findByFk(fk);
     }
     @PutMapping(path="/update")
-    public @ResponseBody String updateUser(
+    public String updateUser(
             @RequestParam Long id, @RequestParam String receiver, @RequestParam String item,
             @RequestParam String number_installments, @RequestParam BigDecimal value_installments,
             @RequestParam String due_date, @RequestParam String purchase_date) {
@@ -64,7 +63,7 @@ public class ExpenseController {
         return "Alterado";
     }
     @DeleteMapping(path="/delete")
-    public @ResponseBody String deleteExpense(@RequestParam Long id) {
+    public String deleteExpense(@RequestParam Long id) {
         expenseCrudRepository.deleteById(id);
         return "Apagado";
     }

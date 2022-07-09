@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
-@Controller
-@RequestMapping(path="/user")
+@RestController
+@RequestMapping(path="/api/user")
 public class UserController {
 
     private final UserCrudRepository userCrudRepository;
@@ -25,16 +25,16 @@ public class UserController {
                 .body(userCrudRepository.save(user));
     }
     @GetMapping(path="/all")
-    public @ResponseBody Iterable<UserBeans> allUser() {
+    public Iterable<UserBeans> allUser() {
         System.out.println(userCrudRepository.findAll());
         return userCrudRepository.findAll();
     }
     @GetMapping(path="/catch")
-    public @ResponseBody UserBeans selectUser(@RequestParam Long id) {
+    public UserBeans selectUser(@RequestParam Long id) {
         return userCrudRepository.findById(id).get();
     }
     @PutMapping(path="/update")
-    public @ResponseBody String updateUser(
+    public String updateUser(
             @RequestParam Long id, @RequestParam String name, @RequestParam String email,
             @RequestParam String password, @RequestParam BigDecimal income) {
 
@@ -51,7 +51,7 @@ public class UserController {
         return "Alterado";
     }
     @DeleteMapping(path="/delete")
-    public @ResponseBody String deleteUser(@RequestParam Long id) {
+    public String deleteUser(@RequestParam Long id) {
         userCrudRepository.deleteById(id);
         return "Apagado";
     }

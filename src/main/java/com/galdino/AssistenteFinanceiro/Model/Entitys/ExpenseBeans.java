@@ -34,7 +34,7 @@ public class ExpenseBeans {
     @ManyToOne
     @JoinColumn(name = "userid")
     @JsonIgnore
-    private UserBeans user;
+    public UserBeans user;
 
     public UserBeans getUser() {
         return user;

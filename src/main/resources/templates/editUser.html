@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      lang="pt-br" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+    <title>Assistente Financeiro</title>
+</head>
+<body>
+<h1>Cadastrar Produtos</h1>
+    <form action="#" th:action="@{/users/edit}" th:object="${users}" method="post">
+        <p>Id: <input type="text" th:field="*{id}" readonly /></p>
+        <p>name: <input type="text" th:field="*{name}" /></p>
+        <p>email: <input type="text" th:field="*{email}" /></p>
+        <p>password: <input type="text" th:field="*{password}" /></p>
+        <p>income: <input type="text" th:field="*{income}" /></p>
+        <input type="submit" value="Alterar" />
+        <input type="reset" value="Reset" />
+    </form>
+</div>
+</body>
+</html>

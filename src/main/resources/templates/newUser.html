@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
   <title>Assistente Financeiro</title>
 </head>
 
@@ -16,40 +17,13 @@
   </div>
   <div class="container4">
     <h2>Cadastrar Usuário</h2>
-    <form action="">
-      <div>
-        <div class="input-geral">
-          <h3>Usuário:</h3>
-          <input type="text" name="nome" id="nome" placeholder="Nome Completo" required>
-          <div class="underline2"></div>
-        </div>
-        <div class="input-geral">
-          <h3>E-mail:</h3>
-          <input type="text" name="email" id="email" placeholder="exemplo@mail.com" required>
-          <div class="underline"></div>
-        </div>
-        <div class="input-geral">
-          <h3>Renda mensal:</h3>
-          <input type="text" name="renda" id="renda" placeholder="R$ 0,00" required>
-          <div class="underline"></div>
-        </div>
-        <div class="input-geral">
-          <h3>Senha:</h3>
-          <input type="password" name="newPassword" id="newPassword" placeholder="Digite a Senha">
-          <div class="underline"></div>
-        </div>
-        <div class="input-geral">
-          <h3>Confirme a senha::</h3>
-          <input type="password" name="confirmaNewPassword" id="confirmaNewPassword" placeholder="Digite a Senha">
-          <div class="underline"></div>
-        </div>
-        <div>
-          <input type="submit" value="Cadastrar" id="cadastrar">
-        </div>
-      </div>
-
+    <form action="#" th:action="@{/users/new}" th:object="${users}" method="post">
+      <p>name: <input type="text" th:field="*{name}" /></p>
+      <p>email: <input type="text" th:field="*{email}" /></p>
+      <p>password: <input type="text" th:field="*{password}" /></p>
+      <p>income: <input type="text" th:field="*{income}" /></p>
+      <p><input type="submit" value="Cadastrar" /> <input type="reset" value="Reset" /></p>
     </form>
-
   </div>
 </main>
 

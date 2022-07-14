@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+    <title>Assistente Financeiro</title>
+</head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Listar Produtos</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>name</th>
+        <th>email</th>
+        <th>password</th>
+        <th>income</th>
+    </tr>
+    <tr th:each="u : ${users}">
+        <td th:text="${u.id}"></td>
+        <td th:text="${u.name}"></td>
+        <td th:text="${u.email}"></td>
+        <td th:text="${u.password}"></td>
+        <td th:text="${u.income}"></td>
+        <td th:text="${u.role}"></td>
+        <td>
+            <a th:href="@{/users/edit/{id} (id=${u.id})}">Editar</a>
+            <a th:href="@{/users/delete/{id} (id=${u.id})}">Excluir</a>
+        </td>
+    </tr>
+</table>
+<a href="/users/new">Cadastrar outro produto</a>
+</body>
+</html>

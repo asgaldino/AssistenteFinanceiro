@@ -1,3 +1,4 @@
+/*
 package com.galdino.AssistenteFinanceiro.Controler;
 
 import com.galdino.AssistenteFinanceiro.Model.Entitys.UserBeans;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 
 @RestController
-@RequestMapping(path="/api/user")
+@RequestMapping(path="/api/user2")
 public class UserController {
 
     private final UserCrudRepository userCrudRepository;
@@ -56,3 +57,5 @@ public class UserController {
         return "Apagado";
     }
 }
+
+ */

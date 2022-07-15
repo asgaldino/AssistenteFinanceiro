@@ -24,40 +24,6 @@ public class ExpenseController {
         this.expenseCrudRepository = expenseCrudRepository;
         this.userCrudRepository = userCrudRepository;
     }
-    /*
-    //não é bonito mas funciona
-    //@PostMapping(path="/add")
-    public @ResponseBody String addUser(
-            @RequestBody Long userid, @RequestBody String receiver, @RequestBody String item,
-            @RequestBody String number_installments, @RequestBody BigDecimal value_installments,
-            @RequestBody String due_date, @RequestBody String purchase_date) {
-
-        // realiza o incapsulamento dos dasos
-        ExpenseBeans e = new ExpenseBeans();
-        UserBeans user = userCrudRepository.findById(userid).get();
-        e.setUser(user);
-        e.setReceiver(receiver);
-        e.setItem(item);
-        e.setNumber_installments(Integer.parseInt(number_installments));
-        e.setValue_installments(value_installments);
-        e.setDue_date(due_date);
-        e.setPurchase_date(purchase_date);
-        // salvar o novo Usuario no banco
-        expenseCrudRepository.save(e);
-        return "Salvo";
-    }
-
-    //substituído pelo metodo assUser
-    //@PostMapping(path="/add")
-    public ResponseEntity<ExpenseBeans> create(@RequestBody ExpenseBeans expense) {
-
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(expenseCrudRepository.save(expense));
-    }
-
-     */
-
-
     @PostMapping(path="/add")
     @ResponseStatus(code = HttpStatus.CREATED)
     public ExpenseBeans addUser(@RequestParam Long userid, @RequestBody ExpenseBeans expense) {

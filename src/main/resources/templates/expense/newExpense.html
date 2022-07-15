@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+  <title>Assistente Financeiro</title>
+</head>
+
+<body>
+
+<main>
+  <div>
+    <h1>Assistente Financeiro</h1>
+  </div>
+  <div class="container3">
+    <h2>Cadastrar Despesa</h2>
+        <form action="#" th:action="@{/expenses/new/}" th:object="${expenses}" method="post">
+          <p>Item: <input type="text" th:field="*{item}" /></p>
+          <p>Credor: <input type="text" th:field="*{receiver}" /></p>
+          <p>Numero de Parcelas: <input type="text" th:field="*{number_installments}" /></p>
+          <p>Valor das Parcelas: <input type="text" th:field="*{value_installments}" /></p>
+          <p>Data de vencimento: <input type="text" th:field="*{due_date}" /></p>
+          <p>Data da compra: <input type="text" th:field="*{purchase_date}" /></p>
+          <p>User ID: <input type="text" th:field="*{user.id}" /></p>
+          <p><input type="submit" value="Cadastrar" /> <input type="reset" value="Reset" /></p>
+        </form>
+  </div>
+</main>
+
+</body>
+</html>

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class ExpenseBeans {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
     // Nome do credor
     @Column(nullable = false, length = 100)
     private String receiver;
@@ -23,6 +23,7 @@ public class ExpenseBeans {
     // Valor das parcelas
     @Column(nullable = false)
     private BigDecimal value_installments;
+    // ********************************************** trocar para expiration_day ***********************
     // Data de Vencimento
     @Column(nullable = false, length = 2)
     private String due_date;

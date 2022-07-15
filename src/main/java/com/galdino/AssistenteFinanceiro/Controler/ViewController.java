@@ -1,4 +1,3 @@
-/*
 package com.galdino.AssistenteFinanceiro.Controler;
 
 import org.springframework.context.annotation.Configuration;
@@ -13,11 +12,9 @@ public class ViewController implements WebMvcConfigurer {
 
         registry.addViewController("/").setViewName("login");
         registry.addViewController("/home").setViewName("home");
-        registry.addViewController("/new").setViewName("newUser");
-        registry.addViewController("/nExpense").setViewName("newExpense");
+        registry.addViewController("/new").setViewName("/user/newUser");
+        registry.addViewController("/nExpense").setViewName("expense/newExpense");
         registry.addViewController("/login").setViewName("login");
     }
 }
-
- */
 

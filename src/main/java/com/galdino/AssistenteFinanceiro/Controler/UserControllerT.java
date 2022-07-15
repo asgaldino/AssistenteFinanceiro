@@ -1,9 +1,7 @@
 package com.galdino.AssistenteFinanceiro.Controler;
 
 import com.galdino.AssistenteFinanceiro.Model.Entitys.UserBeans;
-import com.galdino.AssistenteFinanceiro.Repository.UserCrudRepository;
 import com.galdino.AssistenteFinanceiro.Repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,29 +20,29 @@ public class UserControllerT {
     @GetMapping("/new")
     public String getUsers(Model model) {
         model.addAttribute("users", new UserBeans());
-        return "newUser";
+        return "/user/newUser";
     }
     @PostMapping("/new")
     public String adicionar(@ModelAttribute UserBeans users, Model model) {
         userRepository.save(users);
-        List<UserBeans> listaUsers = userRepository.findAll();
-        model.addAttribute("users", listaUsers);
-        return "users";
+        List<UserBeans> usersList = userRepository.findAll();
+        model.addAttribute("users", usersList);
+        return "/user/users";
     }
 
     @GetMapping("/users")
     public String listaUsers(@ModelAttribute UserBeans users, Model model) {
         List<UserBeans> listaUsers = userRepository.findAll();
         model.addAttribute("users", listaUsers);
-        return "users";
+        return "/user/users";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUserBeans(@PathVariable Long id, Model model) {
         userRepository.deleteById(id);
-        List<UserBeans> listaUsers = userRepository.findAll();
-        model.addAttribute("users", listaUsers);
-        return "users";
+        List<UserBeans> usersList = userRepository.findAll();
+        model.addAttribute("users", usersList);
+        return "/user/users";
     }
 
     @GetMapping("/{id}")
@@ -52,26 +50,11 @@ public class UserControllerT {
         return userRepository.findById(id).get();
     }
 
-    /*
-
-    @GetMapping("/edit/{id}")
-    UserBeans updateUserBeans(@RequestBody UserBeans newUser, @PathVariable Long id) {
-        UserBeans users = userRepository.findById(id).get();
-        users.setName(newUser.getName());
-        users.setEmail(newUser.getEmail());
-        users.setPassword(newUser.getPassword());
-        users.setIncome(newUser.getIncome());
-
-        return userRepository.save(users);
-    }
-
-     */
-
     @GetMapping ("/edit/{id}")
     public String altProdutos(@PathVariable Long id, Model model) {
         UserBeans u = userRepository.findById(id).get();
         model.addAttribute("users", u);
-        return "editUser";
+        return "/user/editUser";
     }
     @PostMapping("/edit")
     public String updateproduto(@ModelAttribute UserBeans newUser, Model model) {
@@ -85,9 +68,9 @@ public class UserControllerT {
         u.setPassword(newUser.getPassword());
         u.setIncome(newUser.getIncome());
         userRepository.save(u);
-        List<UserBeans> listaProdutos = userRepository.findAll();
-        model.addAttribute("users", listaProdutos);
-        return "users";
+        List<UserBeans> usersList = userRepository.findAll();
+        model.addAttribute("users", usersList);
+        return "/user/users";
 
     }
 

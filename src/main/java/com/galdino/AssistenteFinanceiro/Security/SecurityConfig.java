@@ -1,6 +1,7 @@
 /*
 package com.galdino.AssistenteFinanceiro.Security;
 
+
 import com.galdino.AssistenteFinanceiro.Model.Entitys.UserBeans;
 import com.galdino.AssistenteFinanceiro.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class SecurityConfig{
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "home").hasAuthority("ROLE_user") //acesso irrestrito (Sem usuário e Senha) para as view "/" e "/home"
-                .antMatchers("/new").permitAll()
+                .antMatchers("/users/new").permitAll()
                 .anyRequest().authenticated()	//define acesso autenticado para as demais views (Nesse caso "/hello")
                 .and()
                 .formLogin()
@@ -45,20 +46,17 @@ public class SecurityConfig{
         List<UserDetails>userDetailsList = new ArrayList<>();
         for (UserBeans userBeans : user) {
             userTemp = userBeans;
-            System.out.println(userTemp.getEmail());
-            System.out.println(userTemp.getPassword());
+            //System.out.println(userTemp.getEmail());
+            //System.out.println(userTemp.getPassword());
             userDetailsList.add(User.withDefaultPasswordEncoder()
                     .username(userTemp.getEmail().toString())
                     .password(userTemp.getPassword().toString())
                     .roles(userTemp.getRole().toString())
                     .build());
+            System.out.println(userTemp.getId().toString());
         }
-
         return new InMemoryUserDetailsManager(userDetailsList);
     }
-    @Bean
-    public WebSecurityCustomizer ignoringCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/new");
-    }
 }
-*/
+
+ */

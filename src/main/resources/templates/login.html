@@ -7,10 +7,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+    <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet" />
     <title>Assistente Financeiro</title>
 </head>
 <body>
+<div th:replace="fragments/header :: header">...</div>
 <main>
     <div>
         <h1>Assistente Financeiro</h1>
@@ -18,23 +19,19 @@
     <div class="container">
         <h2>Login</h2>
         <div th:if="${param.error}">
-            Usuário ou senha inválidos.
+            Usuário ou senha inválidos!!!
         </div>
         <div th:if="${param.logout}">
             Você fez logout.
         </div>
         <form th:action="@{/login}" method="post">
-            <div class="input-geral">
-                <label>
-                    <input type="text" name="username" placeholder="Email"/>
-                </label>
-                <div class="underline"></div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">E-mail address</label>
             </div>
-            <div class="input-geral">
-                <label>
-                    <input type="password" name="password" placeholder="Password"/>
-                </label>
-                <div class="underline"></div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
             </div>
             <div>
                 <input type="submit" value="Entrar" id="entrar">
@@ -52,5 +49,7 @@
             </div>
     </div>
 </main>
+<div th:replace="fragments/footer :: footer">...</div>
+<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
 </body>
 </html>

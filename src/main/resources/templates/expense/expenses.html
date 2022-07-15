@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <title>Assistente Financeiro</title>
+</head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header">...</div>
+<h1>Listar Produtos</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>name</th>
+        <th>email</th>
+        <th>password</th>
+        <th>income</th>
+    </tr>
+    <tr th:each="u : ${expenses}">
+        <td th:text="${u.id}"></td>
+        <td th:text="${u.item}"></td>
+        <td th:text="${u.receiver}"></td>
+        <td th:text="${u.number_installments}"></td>
+        <td th:text="${u.value_installments}"></td>
+        <td th:text="${u.due_date}"></td>
+        <td th:text="${u.purchase_date}"></td>
+        <td>
+            <a th:href="@{/expenses/edit/{id} (id=${u.id})}">Editar</a>
+            <a th:href="@{/expenses/delete/{id} (id=${u.id})}">Excluir</a>
+        </td>
+    </tr>
+</table>
+<a href="/expenses/new">Cadastrar outro produto</a>
+<div th:replace="fragments/footer :: footer">...</div>
+</body>
+</html>

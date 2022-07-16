@@ -1,0 +1,20 @@
+.btn-primary{
+    margin-top: 5px;
+}
+.container-login{
+    width: 300px;
+}
+.expense-id{
+    display: none;
+}
+table{
+    border: solid 2px;
+    text-align: center;
+}
+.item{
+    margin-right: 30px;
+    text-align: left;
+}
+#details{
+    border: solid 2px red;
+}

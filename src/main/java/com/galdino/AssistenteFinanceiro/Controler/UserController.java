@@ -1,17 +1,15 @@
-/*
 package com.galdino.AssistenteFinanceiro.Controler;
 
 import com.galdino.AssistenteFinanceiro.Model.Entitys.UserBeans;
 import com.galdino.AssistenteFinanceiro.Repository.UserCrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
 @RestController
-@RequestMapping(path="/api/user2")
+@RequestMapping(path="/api/user")
 public class UserController {
 
     private final UserCrudRepository userCrudRepository;
@@ -57,5 +55,3 @@ public class UserController {
         return "Apagado";
     }
 }
-
- */

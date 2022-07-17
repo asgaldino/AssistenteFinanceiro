@@ -46,8 +46,10 @@ public class UserControllerT {
     }
 
     @GetMapping("/{id}")
-    UserBeans getUserBeans(@PathVariable Long id) {
-        return userRepository.findById(id).get();
+    public String getUser(@PathVariable Long id, Model model) {
+        UserBeans u = userRepository.findById(id).get();
+        model.addAttribute("users", u);
+        return "/user/users";
     }
 
     @GetMapping ("/edit/{id}")

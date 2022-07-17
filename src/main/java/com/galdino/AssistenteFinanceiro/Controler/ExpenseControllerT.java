@@ -4,6 +4,7 @@ import com.galdino.AssistenteFinanceiro.Model.Entitys.ExpenseBeans;
 import com.galdino.AssistenteFinanceiro.Model.Entitys.UserBeans;
 import com.galdino.AssistenteFinanceiro.Repository.ExpenseRepository;
 import com.galdino.AssistenteFinanceiro.Repository.UserRepository;
+import com.galdino.AssistenteFinanceiro.Service.getUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,11 +42,16 @@ public class ExpenseControllerT {
         model.addAttribute("expenses", expenseList);
         return "/expense/expenses";
     }
+    @GetMapping(path="/catchByUser")
+    public Iterable<ExpenseBeans> selectExpenseByUser(@RequestParam Long fk) {
+        return expenseRepository.findByFk(fk);
+    }
 
     @GetMapping("/expenses")
     public String listaExpenses(@ModelAttribute ExpenseBeans expenses, Model model) {
-        List<ExpenseBeans> expenseList = expenseRepository.findAll();
-        model.addAttribute("expenses", expenseList);
+        Long userid = 1L;
+        //List<ExpenseBeans> expenseList = expenseRepository.findByFk(userid);
+        model.addAttribute("expenses", expenseRepository.findByFk(userid));
         return "/expense/expenses";
     }
 

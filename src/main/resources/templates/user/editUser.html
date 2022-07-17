@@ -1,26 +1,56 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org"
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      lang="pt-br" >
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
     <title>Assistente Financeiro</title>
 </head>
 <body>
-<h1>Cadastrar Produtos</h1>
-    <form action="#" th:action="@{/users/edit}" th:object="${users}" method="post">
-        <p>Id: <input type="text" th:field="*{id}" readonly /></p>
-        <p>name: <input type="text" th:field="*{name}" /></p>
-        <p>email: <input type="text" th:field="*{email}" /></p>
-        <p>password: <input type="text" th:field="*{password}" /></p>
-        <p>income: <input type="text" th:field="*{income}" /></p>
-        <input type="submit" value="Alterar" />
-        <input type="reset" value="Reset" />
-    </form>
-</div>
+  <div th:replace="fragments/header :: header">...</div>
+  <main>
+    <div class="container card">
+      <h2>Editar usuário</h2>
+      <form class="row g-3" action="#" th:action="@{/users/edit}" th:object="${users}" method="post">
+        <div class="col-md-6">
+          <label for="name" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="name" th:field="*{name}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="email" class="form-label">E-mail</label>
+          <input type="text" class="form-control" id="email" th:field="*{email}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="password" class="form-label">Senha</label>
+          <input type="password" class="form-control" id="password" th:field="*{password}" required>
+        </div>
+        <div class="col-md-6">
+          <label for="income" class="form-label">Renda</label>
+          <input type="text" class="form-control" id="income" th:field="*{income}" required>
+        </div>
+        <div class="buttons">
+          <button type="reset" class="btn btn-light">Reset</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+          <a href="/users/users">
+            <button type="button" class="btn btn-light">Cancelar</button>
+          </a>
+        </div>
+        <div class="display-none">
+          <input type="text" th:field="*{id}">
+        </div>
+  
+            
+  
+          </form>
+    </div>
+    
+  </main>
+<div th:replace="fragments/footer :: footer">...</div>
+<script type="text/javascript" th:src="@{../../js/bootstrap.js}"></script>
 </body>
 </html>

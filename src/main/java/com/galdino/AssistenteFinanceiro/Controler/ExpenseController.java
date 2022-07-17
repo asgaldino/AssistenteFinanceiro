@@ -5,7 +5,6 @@ import com.galdino.AssistenteFinanceiro.Model.Entitys.UserBeans;
 import com.galdino.AssistenteFinanceiro.Repository.ExpenseCrudRepository;
 import com.galdino.AssistenteFinanceiro.Repository.UserCrudRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;

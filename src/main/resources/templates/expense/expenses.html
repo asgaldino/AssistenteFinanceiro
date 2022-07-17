@@ -11,20 +11,17 @@
     <link href="../../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
     <title>Assistente Financeiro</title>
 </head>
-<meta charset="UTF-8">
-<title>Title</title>
-</head>
 <body>
 <div th:replace="fragments/header :: header">...</div>
 <div class="container">
     <div class="row">
-        <div class="col-8">
-            <div class="container-table">
+        <div class="container col-7">
+            <div class="card">
                 <h1>Despesas</h1>
                 <table class="table table-striped">
                     <tr>
-                        <th class="expense-id" >ID</th>
-                        <th class="item" >Item</th>
+                        <th class="display-none" >ID</th>
+                        <th class="first-col" >Item</th>
                         <th>Credor</th>
                         <th>Nº Parcelas</th>
                         <th>Valor</th>
@@ -38,8 +35,8 @@
                         </th>
                     </tr>
                     <tr th:each="u : ${expenses}">
-                        <td class="expense-id" th:text="${u.id}"></td>
-                        <td class="item" th:text="${u.item}"></td>
+                        <td class="display-none" th:text="${u.id}"></td>
+                        <td class="first-col" th:text="${u.item}"></td>
                         <td th:text="${u.receiver}"></td>
                         <td th:text="${u.number_installments}"></td>
                         <td th:text="${u.value_installments}"></td>
@@ -59,12 +56,12 @@
                 </table>
             </div>        
         </div> 
-        <div class="col-4">
-            <div id="details">
+        <div class="col-3 card details sticky">
+            <div  id="details">
                 <h2>Visão geral</h2>
-                <div class="income">income</div>
-                <div class="total-expenses">total</div>
-                <div class="percentage">percentage</div>
+                <div class="income">Renda Mensal:</div>
+                <div class="total-expenses">Total de Despesas:</div>
+                <div class="percentage">Percentual Comprometido:</div>
             </div>
         </div>   
     </div>
@@ -72,6 +69,7 @@
 </div>
 
 <div th:replace="fragments/footer :: footer">...</div>
+<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
 </body>
 
 </html>

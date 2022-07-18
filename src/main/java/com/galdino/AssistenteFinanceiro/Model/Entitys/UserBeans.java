@@ -18,7 +18,7 @@ public class UserBeans {
     @Column(nullable = false, length = 12)
     private String password;
     @Column(nullable = false)
-    private BigDecimal income;
+    public BigDecimal income;
     @Column(nullable = false)
     private final String role = "user";
 

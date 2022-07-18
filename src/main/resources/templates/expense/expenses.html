@@ -36,10 +36,10 @@
                     </tr>
                     <tr th:each="u : ${expenses}">
                         <td class="display-none" th:text="${u.id}"></td>
-                        <td class="first-col" th:text="${u.item}"></td>
+                        <td class="first-col item" th:text="${u.item}"></td>
                         <td th:text="${u.receiver}"></td>
                         <td th:text="${u.number_installments}"></td>
-                        <td th:text="${u.value_installments}"></td>
+                        <td class="vInstallments" th:text="${u.value_installments}"></td>
                         <td th:text="${u.due_date}"></td>
                         <td th:text="${u.purchase_date}"></td>
                         <td>
@@ -57,18 +57,27 @@
             </div>        
         </div> 
         <div class="col-3 card details sticky">
-            <div  id="details">
-                <h2>Visão geral</h2>
-                <div class="income">Renda Mensal:</div>
-                <div class="total-expenses">Total de Despesas:</div>
-                <div class="percentage">Percentual Comprometido:</div>
+            <div  id="details" th:each="i : ${expenses}">
+                <div class="incomes" th:text="${i.user.income}" style="display: none;"></div>
+                <div class="incomes" th:text="${i.user.income}" style="display: none;"></div>
+                <div th:text="${i.value_installments}" style="display: none;"></div>
+            </div>
+            <div><h2 id="committed">Renda comprometida:</h2></div>
+            <div class="progress">
+                <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div style="margin-top: 20px">
+                <h2>Valor disponível: </h2>
+                <h2 id="available"></h2>
+            </div>
+            <div>
+
             </div>
         </div>   
     </div>
-
 </div>
-
 <div th:replace="fragments/footer :: footer">...</div>
+<script type="text/javascript" th:src="@{/charts/chart.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
 </body>
 

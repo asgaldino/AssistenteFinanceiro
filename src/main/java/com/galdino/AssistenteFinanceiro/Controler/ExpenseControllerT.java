@@ -40,7 +40,7 @@ public class ExpenseControllerT {
         expenseRepository.save(expenses);
         List<ExpenseBeans> expenseList = expenseRepository.findAll();
         model.addAttribute("expenses", expenseList);
-        return "/expense/expenses";
+        return listaExpenses(expenses, model);
     }
     @GetMapping(path="/catchByUser")
     public Iterable<ExpenseBeans> selectExpenseByUser(@RequestParam Long fk) {
@@ -49,18 +49,20 @@ public class ExpenseControllerT {
 
     @GetMapping("/expenses")
     public String listaExpenses(@ModelAttribute ExpenseBeans expenses, Model model) {
-        Long userid = 1L;
-        //List<ExpenseBeans> expenseList = expenseRepository.findByFk(userid);
-        model.addAttribute("expenses", expenseRepository.findByFk(userid));
+        Long userid = 2L;
+        UserBeans user = userRepository.findById(userid).get();
+        System.out.println(user.getIncome());
+        List<ExpenseBeans> expenseList = expenseRepository.findByFk(userid);
+        model.addAttribute("expenses", expenseList);
         return "/expense/expenses";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteUserBeans(@PathVariable Long id, Model model) {
+    public String deleteUserBeans(@PathVariable Long id,@ModelAttribute ExpenseBeans expenses, Model model) {
         expenseRepository.deleteById(id);
         List<ExpenseBeans> expenseList = expenseRepository.findAll();
         model.addAttribute("expenses", expenseList);
-        return "/expense/expenses";
+        return listaExpenses(expenses, model);
     }
     @GetMapping("/{id}")
     ExpenseBeans getUserBeans(@PathVariable Long id) {
@@ -74,7 +76,7 @@ public class ExpenseControllerT {
         return "/expense/editExpenses";
     }
     @PostMapping("/edit")
-    public String updateproduto(@ModelAttribute ExpenseBeans newExpense, Model model) {
+    public String updateproduto(@ModelAttribute ExpenseBeans newExpense,@ModelAttribute ExpenseBeans expenses, Model model) {
         ExpenseBeans u = expenseRepository.findById(newExpense.getId()).get();
         if (newExpense.getReceiver() != null) {
             u.setReceiver(newExpense.getReceiver());
@@ -89,6 +91,6 @@ public class ExpenseControllerT {
         expenseRepository.save(u);
         List<ExpenseBeans> expensesList = expenseRepository.findAll();
         model.addAttribute("expenses", expensesList);
-        return "/expense/expenses";
+        return listaExpenses(expenses, model);
     }
 }

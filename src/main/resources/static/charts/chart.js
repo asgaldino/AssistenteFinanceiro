@@ -17,8 +17,7 @@ setAvailable.innerHTML = "R$ " +available+",00";
 let percent = parseInt((committed * 100) / income);
 let bar = document.getElementById("progress-bar");
 bar.style.width = percent+'%'
-let teste = bar.innerHTML = percent + "%"
-console.log(teste)
+bar.innerHTML = percent + "%"
 
 if (percent <= 30){
     bar.style.background = "linear-gradient(to right, rgb(73, 200, 116) 0%, rgb(53, 180, 133) 100%)"

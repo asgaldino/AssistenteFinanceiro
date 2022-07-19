@@ -2,8 +2,6 @@ package com.galdino.AssistenteFinanceiro.Model.Entitys;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
-
 
 @Entity
 @Table(name = "tb_user")
@@ -15,15 +13,10 @@ public class UserBeans {
     private String name;
     @Column(nullable = false, unique = true, length = 100)
     private String email;
-    @Column(nullable = false, length = 12)
+    @Column(nullable = false)
     private String password;
     @Column(nullable = false)
     public BigDecimal income;
-    @Column(nullable = false)
-    private final String role = "user";
-
-    //@OneToMany
-    //private List<ExpenseBeans> expenseBeans;
 
     public Long getId() {
         return id;
@@ -65,14 +58,6 @@ public class UserBeans {
         this.income = income;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    //public void setRole(String role) {
-    //    this.role = role;
-    //}
-
     @Override
     public String toString() {
         return "UserBeans{" +
@@ -81,7 +66,6 @@ public class UserBeans {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", income=" + income +
-                ", role='" + role + '\'' +
                 '}';
     }
 }

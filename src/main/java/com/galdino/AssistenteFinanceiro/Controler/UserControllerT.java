@@ -2,6 +2,8 @@ package com.galdino.AssistenteFinanceiro.Controler;
 
 import com.galdino.AssistenteFinanceiro.Model.Entitys.UserBeans;
 import com.galdino.AssistenteFinanceiro.Repository.UserRepository;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,8 @@ public class UserControllerT {
         this.userRepository = userRepository;
     }
 
+    PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
     @GetMapping("/new")
     public String getUsers(Model model) {
         model.addAttribute("users", new UserBeans());
@@ -24,6 +28,7 @@ public class UserControllerT {
     }
     @PostMapping("/new")
     public String adicionar(@ModelAttribute UserBeans users, Model model) {
+        passwordEncoder.encode(users.getPassword());
         userRepository.save(users);
         List<UserBeans> usersList = userRepository.findAll();
         model.addAttribute("users", usersList);
@@ -67,13 +72,12 @@ public class UserControllerT {
         if (newUser.getName() != null) {
             u.setEmail(newUser.getEmail());
         }
-        u.setPassword(newUser.getPassword());
+        u.setPassword(passwordEncoder.encode(newUser.getPassword()));
         u.setIncome(newUser.getIncome());
         userRepository.save(u);
         List<UserBeans> usersList = userRepository.findAll();
         model.addAttribute("users", usersList);
         return "/user/users";
-
     }
 
 }

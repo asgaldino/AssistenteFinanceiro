@@ -4,7 +4,6 @@ import com.galdino.AssistenteFinanceiro.Model.Entitys.ExpenseBeans;
 import com.galdino.AssistenteFinanceiro.Model.Entitys.UserBeans;
 import com.galdino.AssistenteFinanceiro.Repository.ExpenseRepository;
 import com.galdino.AssistenteFinanceiro.Repository.UserRepository;
-import com.galdino.AssistenteFinanceiro.Service.getUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +26,9 @@ public class ExpenseControllerT {
     @GetMapping("/new")
     public String getUsers(Model model) {
         ExpenseBeans e = new ExpenseBeans();
-        Long userid = 2L;
+        // Variável que define o id do usuário
+        // implemntar substituição em cenario com mais de um usuário
+        Long userid = 1L;
         UserBeans user = userRepository.findById(userid).get();
         e.setUser(user);
         System.out.println(user.id);
@@ -49,7 +50,9 @@ public class ExpenseControllerT {
 
     @GetMapping("/expenses")
     public String listaExpenses(@ModelAttribute ExpenseBeans expenses, Model model) {
-        Long userid = 2L;
+        // Variável que define o id do usuário
+        // implemntar substituição em cenario com mais de um usuário
+        Long userid = 1L;
         UserBeans user = userRepository.findById(userid).get();
         System.out.println(user.getIncome());
         List<ExpenseBeans> expenseList = expenseRepository.findByFk(userid);
